@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safar Saathi - India Transit Alarm</title>
+    <!-- Modern Google Font optimized for readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Safar Saathi</h1>
+        <p>Your Smart Indian Transit Companion</p>
+    </header>
+
+    <main>
+        <!-- Navigation Tabs -->
+        <nav class="tabs" aria-label="Main Navigation">
+            <button class="tab-btn active" data-target="alarm-tab" aria-selected="true" aria-controls="alarm-tab">
+                ⏰ Transit Alarm
+            </button>
+            <button class="tab-btn" data-target="transport-tab" aria-selected="false" aria-controls="transport-tab">
+                🛺 Local Transport
+            </button>
+            <button class="tab-btn" data-target="sos-tab" aria-selected="false" aria-controls="sos-tab">
+                🚨 Emergency SOS
+            </button>
+        </nav>
+
+        <!-- Tab Content: Alarm Tracker -->
+        <section id="alarm-tab" class="tab-content active" role="tabpanel" aria-labelledby="alarm-tab">
+            <h2>Set Your Destination Alarm</h2>
+            
+            <div class="form-group">
+                <label for="destination">Search Railway Station, Bus Stand, or Address:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="destination" placeholder="e.g. New Delhi Railway Station" aria-required="true">
+                    <button id="search-dest-btn" class="icon-btn" aria-label="Search Destination">🔍</button>
+                </div>
+                <!-- Search results will appear here -->
+                <ul id="search-results" class="dropdown-list hidden" aria-live="polite"></ul>
+            </div>
+
+            <div class="form-group">
+                <label for="minutes-threshold">Alert me when I am this many minutes away:</label>
+                <input type="number" id="minutes-threshold" min="1" max="180" value="15" aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="saved-trips">Quick Select (Saved Trips):</label>
+                <select id="saved-trips" aria-label="Select a saved trip">
+                    <option value="">-- Choose a saved trip --</option>
+                </select>
+            </div>
+
+            <button id="start-tracking-btn" class="primary-btn large-btn">Start Tracking Journey</button>
+            <button id="stop-tracking-btn" class="danger-btn large-btn hidden">Stop Tracking</button>
+
+            <!-- Status Alerts Area -->
+            <div id="status-panel" class="status-panel hidden" aria-live="assertive">
+                <h3>Journey Status</h3>
+                <p id="current-status-text">Locating...</p>
+                <div class="eta-display">
+                    <span class="eta-label">Estimated Time:</span>
+                    <span id="eta-value" class="eta-value">-- mins</span>
+                </div>
+                <div class="distance-display">
+                    <span class="distance-label">Distance:</span>
+                    <span id="distance-value" class="distance-value">-- km</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab Content: Local Transport -->
+        <section id="transport-tab" class="tab-content hidden" role="tabpanel" aria-labelledby="transport-tab">
+            <h2>Find Local Transport</h2>
+            <p id="current-location-text">Detecting your location...</p>
+            <button id="refresh-transport-btn" class="secondary-btn">Refresh Options</button>
+            
+            <div id="transport-list" class="transport-grid mt-4">
+                <!-- Transport cards will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Tab Content: Emergency SOS -->
+        <section id="sos-tab" class="tab-content hidden" role="tabpanel" aria-labelledby="sos-tab">
+            <h2>Emergency SOS Services</h2>
+            <p>Share your live location quickly with family and friends.</p>
+            
+            <div class="sos-actions">
+                <button id="share-whatsapp-btn" class="sos-btn whatsapp-btn large-btn">
+                    💬 Share Location via WhatsApp
+                </button>
+                <button id="share-sms-btn" class="sos-btn sms-btn large-btn">
+                    📱 Share Location via SMS
+                </button>
+                <button id="dial-police-btn" class="sos-btn call-btn large-btn">
+                    🚓 Call Police (112)
+                </button>
+                <button id="dial-railway-btn" class="sos-btn call-btn large-btn">
+                    🚆 Railway Helpline (139)
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Audio Element for Alarm -->
+    <audio id="alarm-audio" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto" loop></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
